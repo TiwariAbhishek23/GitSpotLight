@@ -6,7 +6,7 @@ import Headerbox from '../components/header/headerbox.js'
 export default function App({ Component, pageProps }) {  
   return(
 
-    <div className='dark:bg-black dark:text-white bg-goldenyellow  -z-50 py-8'>
+    <div className='bg-black text-white   -z-50 py-8'>
    <Header/>
    <Headerbox/>
     <Component {...pageProps} />

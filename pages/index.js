@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import User from '../components/user/user.js';
 import GotoTop from '../components/gototop/gototop.js';
-import GithubCard from '../components/githubCard/githubcard'
+
 import Heatmap from '../components/heatmap/heatmap.js';
+import Hero from '../components/hero/hero.js';
 export default function Home() {
   return (
     <>
@@ -14,9 +15,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main >
-      <User/>
+        <Hero/>
+      {/* <User/> */}
      <GotoTop/>
-     <GithubCard/>
+    
      {/* <Heatmap/> */}
      
 

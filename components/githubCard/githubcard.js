@@ -4,7 +4,7 @@ import Image from "next/image";
 
 
   
-const OpenCard = () => {
+const OpenCard = ({user}) => {
   const [followers, setFollowers] = useState(null)
   const [repos, setRepos] = useState(null)
   const [pullRequests, setPullRequests] = useState(null)
@@ -26,7 +26,7 @@ const OpenCard = () => {
           const header = {
             Authentication :'Bearer ${process.env.Github_Auth_Token}'
           }
-          const response = await fetch("https://api.github.com/users/AbhishekTiwari23/orgs",{header});
+          const response = await fetch(`https://api.github.com/users/${user}/orgs`,{header});
           const data = await response.json();
           setorgs(data);
           
@@ -43,7 +43,7 @@ const OpenCard = () => {
         const header = {
           Authentication :'Bearer ${process.env.Github_Auth_Token}'
         }
-        const response = await fetch("https://api.github.com/users/AbhishekTiwari23", {header});
+        const response = await fetch(`https://api.github.com/users/${user}`, {header});
      const data = await response.json();
     //  console.log(data);
      setFollowers( data.followers);
@@ -60,7 +60,7 @@ const OpenCard = () => {
           Authentication :'Bearer ${process.env.Github_Auth_Token}'
         }
        
-        const response = await fetch("https://api.github.com/users/AbhishekTiwari23/repos",{ header});
+        const response = await fetch(`https://api.github.com/users/${user}/repos`,{ header});
         const data = await response.json();
         setRepos(data.length)
 
@@ -77,7 +77,7 @@ const OpenCard = () => {
           Authentication :'Bearer ${process.env.Github_Auth_Token}'
         }
        
-        const response = await fetch("https://api.github.com/users/AbhishekTiwari23/repos", { header})
+        const response = await fetch(`https://api.github.com/users/${user}/repos`, { header})
       
       const data = await response.json();
       let totalStars = 0;
@@ -105,7 +105,7 @@ const OpenCard = () => {
           Authentication :'Bearer ${process.env.Github_Auth_Token}'
         }
        
-        const response = await fetch("https://api.github.com/search/issues?q=author:Abhishektiwari23", { header})
+        const response = await fetch(`https://api.github.com/search/issues?q=author:${user}`, { header})
       
       const data = await response.json();
       setIssues(data.total_count)
@@ -123,7 +123,7 @@ const OpenCard = () => {
           Authentication :'Bearer ${process.env.Github_Auth_Token}'
         }
        
-        const response = await fetch('https://api.github.com/search/commits?q=author:Abhishektiwari23', { header})
+        const response = await fetch(`https://api.github.com/search/commits?q=author:${user}`, { header})
         const data = await response.json()
         setCommits(data.total_count)
       } catch (error) {
@@ -140,7 +140,7 @@ const OpenCard = () => {
           Authentication :'Bearer ${process.env.Github_Auth_Token}'
         }
        
-        const response = await fetch("https://api.github.com/search/issues?q=type:pr+author:Abhishektiwari23",{ header});
+        const response = await fetch(`https://api.github.com/search/issues?q=type:pr+author:${user}`,{ header});
         const data = await response.json();
         setPullRequests(data.total_count);
 
@@ -168,7 +168,7 @@ const OpenCard = () => {
      }
   return (
     <>
-    <div className="card lg:w-1/2  mx-auto lg:mt-10 lg:p-9 ">
+    <div className="card   mx-auto lg:p-9 ">
     <div className="stats mx-auto my-4 px-1 py-9 bg-white dark:bg-goldenyellow text-black rounded-4xl border border-solid border-black"> 
     <div className="stats-wrap inline-block ">
       <ul >
@@ -185,7 +185,7 @@ const OpenCard = () => {
       </div>
       </div> 
     </div>
-    <div className="orgs-title lg:w-1/2 mx-auto  lg:p-8 ">Organisations I am a part of
+    <div className="orgs-title  lg:p-8 "> <span className="grade text-4xl">Organisations</span>
     <div className="orgs">
       {orgs?(
         orgs.map(org =>(
