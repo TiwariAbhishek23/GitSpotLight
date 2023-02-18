@@ -1,4 +1,4 @@
-# GitSpotLight
+# GitSpotLight 🐙
 
  GitSpotLight is a web application that generates GitHub stats for a user's account and allows for comparison with another user's stats. The application is built using Next.js, Tailwind CSS, and the GitHub API. It also features a contact form using Nodemailer for users to reach out to the developer.
 
@@ -20,8 +20,10 @@
 
 - User Stats Page (Home)
     ![](./assets/readme/home.png)
+
 - Compare Page
     ![](./assets/readme/compare.png)
+    
 - ContactUs Page
     ![](./assets/readme/contact.png)
 
