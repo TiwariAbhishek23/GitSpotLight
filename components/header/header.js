@@ -16,6 +16,7 @@ const Header = () => {
       <div className="name-logo inline-block  ">
         <Link href="/" className="logo">
             <Image src={Logo} alt="logo" className="abhiLogo inline w-24 lg:w-auto" height="70" />
+            <div className="name inline m-2 text-2xl">GitSpotLight</div>
         </Link>
       </div>
         <div className="menu-item lg:inline-block float-right hidden lg:m-4 ">
