@@ -1,6 +1,15 @@
 # GitSpotLight 🐙
 
- GitSpotLight is a web application that generates GitHub stats for a user's account and allows for comparison with another user's stats. The application is built using Next.js, Tailwind CSS, and the GitHub API. It also features a contact form using Nodemailer for users to reach out to the developer.
+ The application is built using Next.js, Tailwind CSS, and the GitHub API. It also features a contact form using Nodemailer for users to reach out to the developer.
+
+## Problem It Solves
+
+- # Developer productivity and motivation
+    - GitSpotLight help the developers to stay motivated and check their progress, they can also compare with friends and others
+- # Hiring and talent acquisition
+    - Employers could quickly get an overview of the candidate's experience, skill level, and areas of expertise.
+- # Open-source project management
+    - Help maintainers to identify top contributors and allocate resources accordingly.
 
 
 ## Features
