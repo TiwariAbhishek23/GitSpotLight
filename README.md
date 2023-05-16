@@ -41,7 +41,7 @@
 To get started with GitSpotLight, follow these steps:
 
 - Clone this repository to your local machine.
-- Install the necessary dependencies by running npm install.
+- Install the necessary dependencies by running `npm install`.
 - Start the application by running npm run dev.
 - Navigate to http://localhost:3000 in your browser to use the application.
 
