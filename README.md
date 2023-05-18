@@ -25,6 +25,22 @@
 - Utilizes the GitHub API
 - Contact form using Nodemailer for users to reach out to the developer
 
+## Current Available Features
+
+- Github Stats Using Github Username
+- Stats Explanation Using Charts
+- Share Button
+
+## UpComing Features
+
+- Compare GitHub Stats
+- Download Github Stats Report
+
+## Future Idia
+
+- Contribution Stats for Large Codebases
+- Hiring Solution
+
 ## Images
 
 - User Stats Page (Home)
