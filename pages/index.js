@@ -1,8 +1,6 @@
 import Head from 'next/head'
 import User from '../components/user/user.js';
 import GotoTop from '../components/gototop/gototop.js';
-
-import Heatmap from '../components/heatmap/heatmap.js';
 import Hero from '../components/hero/hero.js';
 export default function Home() {
   return (
@@ -19,8 +17,7 @@ export default function Home() {
       {/* <User/> */}
      <GotoTop/>
     
-     {/* <Heatmap/> */}
-     
+
 
       </main>
     </>
