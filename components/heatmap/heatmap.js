@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import moment from 'moment';
 import Head from 'next/head';
-import 'react-calendar-heatmap/dist/styles.css';
 
 
 const HeatMap = () => {
