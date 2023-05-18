@@ -78,7 +78,7 @@ Contributions are always welcome! If you would like to contribute to the project
 - [GitHub API](https://docs.github.com/en/rest)
 - [Next.js](https://nextjs.org/docs/getting-started)
 - [TailwindCss](https://tailwindcss.com/docs/installation)
-- [Cal-Heatmap](https://cal-heatmap.com/)
+- [Chart.Js](https://www.chartjs.org/docs/latest/)
 
 ## Contact
 - If you have any questions about GitSpotLight or would like to reach out to the developer, please use the contact form provided in the application or email me directly at tiwari.abhishektiwari23@gmail.com.

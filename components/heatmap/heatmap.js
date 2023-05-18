@@ -1,15 +1,11 @@
 import { useState, useEffect } from 'react';
 import moment from 'moment';
 import Head from 'next/head';
-import CalHeatMap from 'cal-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 
 
 const HeatMap = () => {
     <Head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cal-heatmap/3.6.0/cal-heatmap.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cal-heatmap/3.6.0/cal-heatmap.min.js"></script>
   </Head>
   const [startDate, setStartDate] = useState('');
   const [error, setError] = useState('');
