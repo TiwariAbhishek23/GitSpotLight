@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link.js";
 import Type from "./typewrite.js";
 import GithubCard from "../githubCard/githubcard";
 import Profile from "../../assets/github.svg";
+
+
+/*
+
+
+
+*/
+
 const Hero = () => {
   const [user, setUser] = useState("");
   const [userData, setUserData] = useState("");
@@ -85,13 +92,13 @@ const Hero = () => {
     return (
       <div className="w-1/2 mx-auto my-24 bg-gray rounded-4xl p-8">
         <div className="form w-1/2 my-24 mx-auto ">
-          <form>
+           <form>
             <div className="flex flex-col space-y-4">
               <label htmlFor="" className="text-center">
                 {" "}
                 Enter Github username
               </label>
-              <input
+                <input
                 type="text"
                 id="username"
                 value={user}
@@ -119,7 +126,6 @@ const Hero = () => {
       <div className="w-1/2 mx-auto my-8  p-8">
         {!userData && (
           <div className="container ">
-            {/* <div className="heading text-4xl text-center ">Hi <span className='wave '>👋</span> <span className="gra">User</span></div> */}
             <div className="subheading text-center text-4xl m-4 p-4">
               Welcode <span className="wave ">👋</span> to{" "}
               <span className="grade">GitSpotLight</span>
@@ -146,7 +152,7 @@ const Hero = () => {
                   value={user}
                   onChange={(e) => setUser(e.target.value)}
                   placeholder="GitHub userName"
-                  className="border-2 border-gray-300 rounded-lg p-2"
+                  className="border-2 border-gray-300 rounded-lg p-2 text-black"
                 />
                 <button
                   type="submit"
@@ -178,7 +184,6 @@ const Hero = () => {
                     </div>
                   )}
                   {email && <div className="mail"> 📬 Email : {email}</div>}
-                  {/* { blog && <div className="blog">🔗 Blog Link : <Link  hreaf='/' target= "_blank" >Link</Link></div>} */}
                   {twitterUserName && (
                     <div className="twitter">
                       🐤 Twitter User Name : {twitterUserName}
