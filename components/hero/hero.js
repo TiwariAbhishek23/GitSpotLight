@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import HeroEffect from "./heroEffect";
 import InputForm from "./inputForm";
 import UserProfileData from "./userDetail";
+import { fetchUserData } from "../../pages/api/githubProfile";
 /*
 
 
@@ -54,16 +55,18 @@ const Hero = () => {
   }
   if (err) {
     return (
-      <>
-        <InputForm user={user} handleSubmit = {handleSubmit}/>
+      <div className="w-1/2 mx-auto my-24 bg-gray rounded-4xl p-8">
+        <InputForm user={user} setUser={setUser} handleSubmit={handleSubmit} />
+
         <div className="error">🥲 Got Error : {err}</div>
-      </>
+      </div>
     );
   }
   if (userData.message === "Not Found") {
     return (
       <div className="w-1/2 mx-auto my-24 bg-gray rounded-4xl p-8">
-       <InputForm user={user} handleSubmit = {handleSubmit}/>
+       <InputForm user={user} setUser={setUser} handleSubmit={handleSubmit} />
+
         <div className="error text-center text-4xl">🥲 UserName not found</div>
       </div>
     );
@@ -75,7 +78,7 @@ const Hero = () => {
           <HeroEffect/>
         )}
         <div className="homeContent m-4 p-4">
-          <InputForm user={user} handleSubmit = {handleSubmit}/>
+          <InputForm user={user} setUser={setUser} handleSubmit={handleSubmit} />
           {userData && (
             <UserProfileData/>
           )}
@@ -85,4 +88,4 @@ const Hero = () => {
   }
 };
 export default Hero;
-export { pic, name, startDate, email, twitterUserName, blog, company};
+// export { pic, name, startDate, email, twitterUserName, blog, company};

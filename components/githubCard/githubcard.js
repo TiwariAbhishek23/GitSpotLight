@@ -19,7 +19,7 @@ const OpenCard = ({ user }) => {
       setLoading(true);
       try {
         const header = {
-          Authentication: "Bearer ${process.env.Github_Auth_Token}",
+          Authentication: `Bearer ${process.env.Github_Auth_Token}`,
         };
         const response = await fetch(
           `https://api.github.com/users/${user}/orgs`,

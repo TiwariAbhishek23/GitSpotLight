@@ -1,82 +1,50 @@
-import React, {useState,useEffect} from 'react'
-import Profile from '../../assets/github.svg'
-const User = () => {
-    const [user, setUser] = useState("");
-    const [pic, setPic] = useState(Profile);
-    const [name, setName] = useState("");
-    const [startDate, setStartDate] = useState("");
-    const [email, setEmail] = useState("");
-    const [twitterUserName, setTwitterUserName] = useState("");
-    const [blog, setBlog] = useState("");
-    const [company, setCompany] = useState("");
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-  
-    const header = {
-      Authentication: `Bearer ${process.env.Github_Auth_Token}`,
-    };
-  
-    const handleSubmit = async (event) => {
-      event.preventDefault();
-  
-      setLoading(true);
-  
-      try {
-        const response = await fetch(`https://api.github.com/users/${user}`, {
-          headers: header,
-        });
-  
-        if (!response.ok) {
-          throw new Error("Invalid username");
-        }
-  
+import { useState } from "react";
+import { fetchUserData } from "../../pages/api/githubProfile";
+
+const useUserData = () => {
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const getUserData = async (username) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetchUserData(username);
+
+      if (!response.ok) {
+        setError("User not found");
+        setUserData(null); // Reset user data
+      } else {
         const data = await response.json();
-        setPic(data.avatar_url);
-        setName(data.name);
-        setEmail(data.email);
-        setBlog(data.blog);
-        setTwitterUserName(data.twitter_username);
-        setStartDate(data.created_at);
-        setCompany(data.company);
-        setLoading(false);
-        setError("");
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
+        const extractedData = {
+          pic: data.avatar_url,
+          name: data.name,
+          startDate: data.created_at,
+          email: data.email,
+          twitterUserName: data.twitter_username,
+          blog: data.blog,
+          company: data.company,
+          followers: data.followers,
+          repos: data.public_repos,
+          pullRequests: data.pull_requests,
+          commits: data.commits,
+          stars: data.stars,
+          issues: data.issues,
+          orgs: data.organizations
+        };
+        setUserData(extractedData);
       }
-    };
-  
-    return (
-      <>
-  
-        {user && (
-          <div className="user">
-            <div className="pic text-center ">
-              <img
-                src={pic}
-                alt="User Profile Avatar"
-                height="40"
-                width="40"
-                className=""
-              />
-            </div>
-            <div className="name">Hi {name}</div>
-            <div className="details">
-              <div className="mail">{email}</div>
-              <div className="blog">{blog}</div>
-              <div className="twitter">{twitterUserName}</div>
-              <div className="company">{company}</div>
-              <div className="date">{startDate}</div>
-            </div>
-          </div>
-        )}
-  
-        {loading && <div className="loading">Still Loading...</div>}
-  
-        {error && <div className="error">{error}</div>}
-      </>
-    );
+    } catch (err) {
+      setError(err.message);
+      setUserData(null); // Reset user data
+    }
+
+    setLoading(false);
   };
-  
-  export default User;
-  
+
+  return { userData, loading, error, getUserData };
+};
+
+export default useUserData;
