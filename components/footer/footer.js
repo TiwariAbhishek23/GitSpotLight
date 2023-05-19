@@ -26,20 +26,6 @@ const Footer = () => {
         </Link></div>
          
         <div className="tagline inline-block float-right text-xs lg:text-base">Made with <big>❤️</big> by Abhishek Tiwari</div>
-      <div className="s ml-96 -mt-20">
-        <ul className="socials hidden lg:inline-block">
-            
-         <li className="foot-link inline-block"> <Link href="/" target= "_blank">
-            <Image src={Github} alt="Github"  height="45"/>
-          </Link></li>
-      <li className="foot-link inline-block ">    <Link href="/" target= "_blank">
-            <Image src={LinkedIn} alt="LinkedIn" />
-          </Link></li>
-      <li className="foot-link inline-block">    <Link href="/" target= "_blank">
-            <Image src={Twitter} alt="Twitter" />
-         </Link></li>
-        </ul>
-        </div>
       </div>
       <style jsx>
         {`
