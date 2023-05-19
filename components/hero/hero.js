@@ -1,52 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 
 import HeroEffect from "./heroEffect";
 import InputForm from "./inputForm";
 import UserProfileData from "./userDetail";
-import { fetchUserData } from "../../pages/api/githubProfile";
-/*
+import { fetchUserData } from "./fetchUserData";
 
-
-
-*/
 
 const Hero = () => {
+
   const [user, setUser] = useState("");
-  const [userData, setUserData] = useState("");
-  const [loading, setLoading] = useState("");
-  const [err, setError] = useState("");
-  const [status, setStatus] = useState("Generate Stats");
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [err, setError] = useState(null);
 
-  const [pic, setPic] = useState("");
-  const [name, setName] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [email, setEmail] = useState("");
-  const [twitterUserName, setTwitterUserName] = useState("");
-  const [blog, setBlog] = useState("");
-  const [company, setCompany] = useState("");
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setLoading(true);
-    setStatus("Extracting Data...");
     try {
-      const response = await fetch(`https://api.github.com/users/${user}`);
-      if (!response.ok) {
+      const response = await fetchUserData(user);
+      if(response === null){
         setUser("");
+        setError("User not found");
       }
-      const data = await response.json();
-      console.log("data " + data);
-      setUserData(data);
-      setPic(data.avatar_url);
-      setName(data.name);
-      setEmail(data.email);
-      setBlog(data.blog);
-      setTwitterUserName(data.twitter_username);
-      setStartDate(data.created_at);
-      setCompany(data.company);
+      setUserData(response);
     } catch (err) {
       setError(err.message);
     }
-
     setLoading(false);
   };
 
@@ -62,7 +42,7 @@ const Hero = () => {
       </div>
     );
   }
-  if (userData.message === "Not Found") {
+  if (userData === null) {
     return (
       <div className="w-1/2 mx-auto my-24 bg-gray rounded-4xl p-8">
        <InputForm user={user} setUser={setUser} handleSubmit={handleSubmit} />
@@ -88,4 +68,4 @@ const Hero = () => {
   }
 };
 export default Hero;
-// export { pic, name, startDate, email, twitterUserName, blog, company};
+

@@ -1,20 +1,17 @@
 import React from 'react'
 import GithubCard from "../githubCard/githubcard";
 import { useState } from "react";
-import pic from "../../assets/github.svg";
 import Profile from "../../assets/github.svg";
 
-// const [name, setName] = useState("");
-// const [Email, setEmail] = useState("");
-// const [twitterUserName, setTwitterUserName] = useState("");
-// const [blog, setBlog] = useState("");
-// const [company, setCompany] = useState("");
-// const [startDate, setStartDate] = useState("");
-// const [user, setUser] = useState("");
+const UserData = ({user}) => {
+  const [pic, setPic] = useState(Profile);
+    const [name, setName] = useState(user.name);
+    const [Email, setEmail] = useState(user.email);
+    const [twitterUserName, setTwitterUserName] = useState(user.
+        twitter_username);
+    const [company, setCompany] = useState(user.company);
+    const [startDate, setStartDate] = useState(user.created_at);
 
-
-
-const UserProfileData = () => {
     return (
         <div className="stats ">
               <div className="user">
@@ -56,4 +53,4 @@ const UserProfileData = () => {
 
     )
 }
-export default UserProfileData;
+export default UserData;

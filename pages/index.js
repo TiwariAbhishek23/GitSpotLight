@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import User from '../components/user/user.js';
 import GotoTop from '../components/gototop/gototop.js';
 import Hero from '../components/hero/hero.js';
 export default function Home() {
@@ -14,7 +13,6 @@ export default function Home() {
       </Head>
       <main >
         <Hero/>
-      {/* <User/> */}
      <GotoTop/>
 
 

@@ -1,15 +1,14 @@
+export default async function handler(req, res) {
+  const { username } = req.query;
 
-export const fetchUserData = async (username) => {
-    try {
-      const response = await fetch(`https://api.github.com/users/${username}`);
-      if (!response.ok) {
-        return null;
-      }
-      const data = await response.json();
-      return data;
-    } catch (err) {
-      throw new Error(err.message);
+  try {
+    const response = await fetch(`https://api.github.com/users/${username}`);
+    if (!response.ok) {
+      return res.status(404).json({ message: 'User not found' });
     }
-};
-
-
+    const data = await response.json();
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}
