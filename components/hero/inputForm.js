@@ -1,5 +1,4 @@
 import React from 'react';
-import {user} from './user';
 
 const InputForm = (props) => {
   const { user, setUser, handleSubmit } = props;
@@ -38,4 +37,4 @@ const InputForm = (props) => {
 };
 
 export default InputForm;
-export {user}
+
