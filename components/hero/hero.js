@@ -9,7 +9,7 @@ import { fetchUserData } from "../fetchApi/fetchUserData";
 const Hero = () => {
 
   const [user, setUser] = useState("");
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState("");
   const [loading, setLoading] = useState(false);
   const [err, setError] = useState(null);
 
@@ -18,7 +18,9 @@ const Hero = () => {
     e.preventDefault();
     setLoading(true);
     try {
+      // checked - working
       const response = await fetchUserData(user);
+      console.log(response + " response")
       if(response === null){
         setUser("");
         setError("User not found");
@@ -29,7 +31,6 @@ const Hero = () => {
     }
     setLoading(false);
   };
-console.log(user + " hero")
   if (loading) {
     return <div className="loading">Still Loadiing...</div>;
   }
@@ -42,7 +43,7 @@ console.log(user + " hero")
       </div>
     );
   }
-  if (userData === null) {
+  if (userData.message === "Not Found") {
     return (
       <div className="w-1/2 mx-auto my-24 bg-gray rounded-4xl p-8">
        <InputForm user={user} setUser={setUser} handleSubmit={handleSubmit} />

@@ -1,6 +1,6 @@
 export const fetchPullRequests = async (username) => {
     try {
-      const response = await fetch(`/api/pullrequest?username=${username}`);
+      const response = await fetch(`/api/pullrequestapi?username=${username}`);
       if (!response.ok) {
         throw new Error("User not found");
 

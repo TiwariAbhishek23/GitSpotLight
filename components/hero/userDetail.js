@@ -1,13 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { fetchUserData } from '../fetchApi/fetchUserData';
-import { fetchPullRequests } from '../fetchApi/fecthPullRequest.js'
+import { fetchPullRequests } from '../fetchApi/fecthPullRequest';
+import { fetchOrgs } from '../fetchApi/fetchOrgs';
 import { fetchCommits } from '../fetchApi/fetchCommits';
 import { fetchRepos } from '../fetchApi/fetchRepo.js';
 import { fetchIssues } from '../fetchApi/fetchIssue.js';
 import UserCard from './userCard';
 
-const UserData = ({ userName }) => {
-  console.log(userName + ' deta');
+const UserDataTransfer = ({ userName }) => {
+  console.log(userName + ' data'); // checked - working
+  const [loading, setLoading] = useState(false);
+  const [err, setError] = useState(null);
+  const [userData, setUserData] = useState(null);
+  const [pullRequests, setPullRequests] = useState(null);
+  const [commits, setCommits] = useState(null);
+  const [repos, setRepos] = useState(null);
+  const [issues, setIssues] = useState(null);
+  const [stars, setStars] = useState(null);
+  const [orgs, setOrgs] = useState(null);
+
+
+
+
   const [user, setUser] = useState({
     avatar_url: '',
     name: '',
@@ -29,115 +43,169 @@ const UserData = ({ userName }) => {
   });
 
   useEffect(() => {
-    const fetchUserDataWrapper = async (userName) => {
+    const fetchUser = async () => {
+      setLoading(true);
       try {
         const response = await fetchUserData(userName);
+        console.log(response + ' response yaha ');
         if (response === null) {
-          return null;
+          setUserData(null);
+          setError('User not found');
         }
-        const data = await response.json();
-        console.log(data + " dataNew");
-        setUser((prevUser) => ({
-          ...prevUser,
-          avatar_url: data.avatar_url,
-          name: data.name,
-          email: data.email,
-          twitter_username: data.twitter_username,
-          company: data.company,
-          created_at: data.created_at,
-          bio: data.bio,
-          blog: data.blog,
-          location: data.location,
-          html_url: data.html_url,
-          public_gists: data.public_gists,
-          public_repos: data.public_repos,
-          followers: data.followers,
-        }));
-      } catch (error) {
-        console.log(error);
-        return error;
+        setUserData(response);
+        console.log(response);
+        if(userData !== null){
+          user.avatar_url = userData.avatar_url;
+          user.name = userData.name;
+          user.email = userData.email;
+          user.twitter_username = userData.twitter_username ? "Not Available" : userData.twitter_username;
+          user.company = userData.company;
+          user.created_at = userData.created_at;
+          user.bio = userData.bio;
+          user.blog = userData.blog;
+          user.location = userData.location;
+          user.html_url = userData.html_url;
+          user.public_gists = userData.public_gists;
+          user.public_repos = userData.public_repos;
+          user.followers = userData.followers;
+        }
+        console.log(user);
+      } catch (err) {
+        setError(err.message);
       }
+      setLoading(false);
     };
 
-    const fetchPullRequestsWrapper = async (username) => {
+    const fetchPullRequest = async () => {
+      setLoading(true);
       try {
-        const response = await fetchPullRequests(username);
+        const response = await fetchPullRequests(userName);
+        console.log(response + ' response yaha ');
         if (response === null) {
-          return null;
+          setPullRequests(null);
+          setError('No Pull Requests');
         }
-
-        const data = await response.json();
-        setUser((prevUser) => ({
-          ...prevUser,
-          pullRequests: data.total_count,
-        }));
-      } catch (error) {
-        console.log(error);
-        return error;
+        setPullRequests(response);
+        console.log(response);
+        if(pullRequests !== null){
+          user.pullRequests = pullRequests;
+        }
+      } catch (err) {
+        setError(err.message);
       }
+      setLoading(false);
     };
 
-    const fetchCommitsWrapper = async (username) => {
+    const fetchCommit = async () => {
+      setLoading(true);
       try {
-        const response = await fetchCommits(username);
+        const response = await fetchCommits(userName);
+        console.log(response + ' response yaha ');
         if (response === null) {
-          return null;
+          setCommits(null);
+          setError('No Commits');
         }
-        const data = await response.json();
-        setUser((prevUser) => ({
-          ...prevUser,
-          commits: data.total_count,
-        }));
-      } catch (error) {
-        console.log(error);
-        return error;
+        setCommits(response);
+        console.log(response);
+        if(commits !== null){
+          user.commits = commits;
+        }
+      } catch (err) {
+        setError(err.message);
       }
+      setLoading(false);
     };
 
-    const fetchReposWrapper = async (username) => {
+    const fetchRepo = async () => {
+      setLoading(true);
       try {
-        const response = await fetchRepos(username);
+        const response = await fetchRepos(userName);
+        console.log(response + ' response yaha ');
         if (response === null) {
-          return null;
+          setRepos(null);
+          setError('No Repos');
         }
-        const data = await response.json();
-        setUser((prevUser) => ({
-          ...prevUser,
-          stars: data.stargazers_count,
-        }));
-      } catch (error) {
-        console.log(error);
-        return error;
+        setRepos(response);
+        console.log(response);
+        if(repos !== null){
+          user.repos = repos;
+        }
+        let totalStars = 0;
+        response.forEach((repo) => {
+          totalStars += repo.strangazers_count;
+        });
+        if (!totalStars) {
+          setStars("Not Sufficient Data");
+        } else {
+          setStars(totalStars);
+          user.stars = stars;
+        }
+      } catch (err) {
+        setError(err.message);
       }
+      setLoading(false);
     };
 
-    const fetchIssuesWrapper = async (username) => {
+    const fetchIssue = async () => {
+      setLoading(true);
       try {
-        const response = await fetchIssues(username);
+        const response = await fetchIssues(userName);
+        console.log(response + ' response yaha ');
         if (response === null) {
-          return null;
+          setIssues(null);
+          setError('No Issues');
         }
-        const data = await response.json();
-        setUser((prevUser) => ({
-          ...prevUser,
-          issues: data.total_count,
-        }));
-      } catch (error) {
-        console.log(error);
-        return error;
+        setIssues(response);
+        console.log(response);
+        if(issues !== null){
+          user.issues = issues;
+        }
+      } catch (err) {
+        setError(err.message);
       }
+      setLoading(false);
     };
 
-    fetchUserDataWrapper(userName);
-    fetchPullRequestsWrapper(userName);
-    fetchCommitsWrapper(userName);
-    fetchReposWrapper(userName);
-    fetchIssuesWrapper(userName);
+    const fetchOrg = async () => {
+      setLoading(true);
+      try {
+        const response = await fetchOrgs(userName);
+        console.log(response + ' response yaha ');
+        if (response === null) {
+          setOrgs(null);
+          setError('No Stars');
+        }
+        setOrgs(response);
+        console.log(response);
+        if(orgs !== null){
+          user.orgs = orgs;
+        }
+      } catch (err) {
+        setError(err.message);
+      }
+      setLoading(false);
+    };
+
+
+
+
+
+
+
+    fetchUser();
+    fetchPullRequest();
+    fetchCommit();
+    fetchRepo();
+    fetchIssue();
+    fetchOrg();
+
   }, [userName]);
 
-  console.log(user + ' userdataafter');
+
+  console.log('in user data');
+  console.log(user);
 
   return <UserCard user={user} />;
 };
 
-export default UserData;
+export default UserDataTransfer;

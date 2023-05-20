@@ -1,7 +1,8 @@
 import React from 'react'
 import GithubCard from '../githubCard/githubcard';
 const UserCard = ({user}) => {
-  console.log(user + " card")
+  console.log("in userCard")
+  console.log(user )
     return (
         <div className="stats ">
         <div className="user">
@@ -37,7 +38,7 @@ const UserCard = ({user}) => {
         </div>
         <span className="grade text-4xl">GitHub Stats</span>
         <div className="githubstats">
-          <GithubCard userName={user.name} />
+          {/* <GithubCard userName={user.name} /> */}
         </div>
       </div>
     )
