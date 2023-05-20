@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import {user} from './user';
 
 const InputForm = (props) => {
   const { user, setUser, handleSubmit } = props;
@@ -7,7 +8,8 @@ const InputForm = (props) => {
   const handleUserChange = (e) => {
     setUser(e.target.value);
   };
-
+  console.log(user + " inputform")
+//
   return (
     <div className="form my-32 mx-auto bg-gray rounded-4xl m-32 p-8">
       <form>
@@ -37,3 +39,4 @@ const InputForm = (props) => {
 };
 
 export default InputForm;
+export {user}

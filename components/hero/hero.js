@@ -3,7 +3,7 @@ import React, {useState } from "react";
 import HeroEffect from "./heroEffect";
 import InputForm from "./inputForm";
 import UserProfileData from "./userDetail";
-import { fetchUserData } from "./fetchUserData";
+import { fetchUserData } from "../fetchApi/fetchUserData";
 
 
 const Hero = () => {
@@ -29,7 +29,7 @@ const Hero = () => {
     }
     setLoading(false);
   };
-
+console.log(user + " hero")
   if (loading) {
     return <div className="loading">Still Loadiing...</div>;
   }
@@ -60,7 +60,8 @@ const Hero = () => {
         <div className="homeContent m-4 p-4">
           <InputForm user={user} setUser={setUser} handleSubmit={handleSubmit} />
           {userData && (
-            <UserProfileData/>
+
+            <UserProfileData userName={user}/>
           )}
         </div>
       </div>
