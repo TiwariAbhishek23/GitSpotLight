@@ -21,4 +21,4 @@ const PieChart = () => {
     </div>
   );
 };
-export default PieChart;
+export default LangPieChart;

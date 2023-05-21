@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { fetchUserData } from "../fetchApi/fetchUserData";
 import { fetchPullRequests } from "../fetchApi/fecthPullRequest";
-import { fetchOrgs } from "../fetchApi/fetchOrgs";
+import { fetchOrganisation } from "../fetchApi/fetchOrgs";
 import { fetchCommits } from "../fetchApi/fetchCommits";
 import { fetchRepos } from "../fetchApi/fetchRepo.js";
 import { fetchIssues } from "../fetchApi/fetchIssue.js";
 import UserCard from "./userCard";
 import GithubCard from "../githubCard/githubcard";
 
+
 const UserDataTransfer = ({ userName }) => {
-  console.log(userName + " data"); // checked - working
+  // console.log(userName + " data"); // checked - working
   const [loading, setLoading] = useState(false);
   const [err, setError] = useState(null);
   const [userData, setUserData] = useState(null);
@@ -17,7 +18,6 @@ const UserDataTransfer = ({ userName }) => {
   const [commits, setCommits] = useState(null);
   const [repos, setRepos] = useState(null);
   const [issues, setIssues] = useState(null);
-  const [stars, setStars] = useState(null);
   const [orgs, setOrgs] = useState(null);
 
   const [user, setUser] = useState({
@@ -27,6 +27,7 @@ const UserDataTransfer = ({ userName }) => {
     blog: "",
 
     commits: "", //
+    commits_count: "",
     company: "",
     created_at: "",
 
@@ -35,15 +36,20 @@ const UserDataTransfer = ({ userName }) => {
     followers: "",
     html_url: "",
     issues: "",
+    issues_count: 0,
     location: "",
 
     name: "",
+    nonForkedRepos: "",
     orgs: "",//
     public_gists: "",
     public_repos: "",
     pullRequests: "",
+    pullRequests_count: "",
 
     repos: "",
+    repos_count_total: "",
+    repos_count_nonforked: "",
     stars: "", //
     twitter_username: "",
 
@@ -51,17 +57,19 @@ const UserDataTransfer = ({ userName }) => {
   });
 
   useEffect(() => {
-    const fetchUser = async () => {
+
+    // Fetching User Data
+    const fetchUserwrapper = async () => {
       setLoading(true);
       try {
         const response = await fetchUserData(userName);
-        console.log(response + " response yaha  userdetail se");
+        // console.log(response + " response yaha  userdetail se");
         if (response === null) {
           setUserData(null);
           setError("User not found");
         }
         setUserData(response);
-        console.log(response);
+        // console.log(response);
         if (userData !== null) {
           user.data = userData;
           user.avatar_url = userData.avatar_url;
@@ -80,26 +88,29 @@ const UserDataTransfer = ({ userName }) => {
           user.public_repos = userData.public_repos;
           user.followers = userData.followers;
         }
-        console.log(user);
+        // console.log(user);
       } catch (err) {
         setError(err.message);
       }
       setLoading(false);
     };
 
-    const fetchPullRequest = async () => {
+    // Fetching Pull Request Data
+
+    const fetchPullRequestWrapper = async () => {
       setLoading(true);
       try {
         const response = await fetchPullRequests(userName);
-        console.log(response + " response yaha ");
+        // console.log(response + " response yaha ");
         if (response === null) {
           setPullRequests(null);
           setError("No Pull Requests");
         }
         setPullRequests(response);
-        console.log(response);
+        // console.log(response);
         if (pullRequests !== null) {
           user.pullRequests = pullRequests;
+          user.pullRequests_count = pullRequests.total_count;
         }
       } catch (err) {
         setError(err.message);
@@ -107,114 +118,106 @@ const UserDataTransfer = ({ userName }) => {
       setLoading(false);
     };
 
-    const fetchCommit = async () => {
+    // Fetching Commit Data
+
+    const fetchCommitWrapper = async () => {
       setLoading(true);
       try {
         const response = await fetchCommits(userName);
-        console.log(response + " response yaha ");
+        // console.log(response + " response yaha ");
         if (response === null) {
           setCommits(null);
           setError("No Commits");
         }
         setCommits(response);
-        console.log(response);
-        if (commits !== null) {
-          user.commits = commits;
-        }
+        // console.log(response);
+        user.commits_count = commits.total_count;
+        // console.log("commits count");
+        // console.log(user.commits_count);
+        // console.log(response);
+        user.commits = commits;
       } catch (err) {
         setError(err.message);
       }
       setLoading(false);
     };
 
-    const fetchRepo = async () => {
+    // Fetching Repo Data
+    const fetchRepoWrapper = async () => {
       setLoading(true);
       try {
         const response = await fetchRepos(userName);
-        console.log(response + " response yaha ");
         if (response === null) {
           setRepos(null);
           setError("No Repos");
         }
         setRepos(response);
-        console.log(response);
-        if (repos) {
-          user.repos = repos;
-        }
-        let totalStars = 0;
-        response.forEach((repos) => {
-          totalStars += repos.strangazers_count;
-        });
-        if (!totalStars) {
-          setStars("Not Sufficient Data");
-        } else {
-          setStars(totalStars);
-          user.stars = stars;
-        }
+        user.repos = repos;
+        user.repos_count_total = repos.length;
+
+        const nonForkedRepos = repos.filter((repo) => !repo.fork);
+        user.repos_count_nonforked = nonForkedRepos.length;
+        user.nonForkedRepos = nonForkedRepos;
+
+        const totalStars = nonForkedRepos.reduce((accumulator, repo) => accumulator + repo.stargazers_count, 0);
+        user.stars = totalStars;
+
       } catch (err) {
         setError(err.message);
       }
       setLoading(false);
     };
 
-    const fetchIssue = async () => {
+    // Fetching Issue Data
+    const fetchIssueWrapper = async () => {
       setLoading(true);
       try {
         const response = await fetchIssues(userName);
-        console.log(response + " response yaha");
+        console.log(response + " response yaha issue se");
         if (response === null) {
           setIssues(null);
           setError("No Issues");
         }
         setIssues(response);
         console.log(response);
-        if (issues !== null) {
-          user.issues = issues;
-        }
+        user.issues = issues;
       } catch (err) {
         setError(err.message);
       }
       setLoading(false);
     };
 
-    const fetchOrg = async () => {
+    // Fetching Org Data
+    const fetchOrgWrapper = async () => {
       setLoading(true);
       try {
-        const response = await fetchOrgs(userName);
-        console.log(response + " response yaha ");
+        const response = await fetchOrganisation(userName);
+        // console.log(response + " response yaha org");
         if (response === null) {
           setOrgs(null);
-          setError("No Stars");
+          setError("No Orgs");
         }
         setOrgs(response);
-        console.log(response);
-        if (orgs !== null) {
-          user.orgs = orgs;
-        }
+
+        // console.log(response);
+        user.orgs = orgs;
+        // console.log(user.orgs);
       } catch (err) {
         setError(err.message);
       }
       setLoading(false);
     };
 
-    fetchUser();
-    fetchPullRequest();
-    fetchCommit();
-    fetchRepo();
-    fetchIssue();
-    fetchOrg();
+    fetchUserwrapper();
+    fetchPullRequestWrapper();
+    fetchCommitWrapper();
+    fetchRepoWrapper();
+    fetchIssueWrapper();
+    fetchOrgWrapper();
   }, []);
 
-  console.log("in user data ");
+  console.log("in user data");
   console.log(user);
-  let total_stars = 0;
-  if (user.repos) {
-    user.repos.forEach((repos) => {
-      total_stars += repos.strangazers_count;
-    });
-  }
-  user.stars = total_stars;
-  console.log(user.stars);
 
 
   return (
@@ -222,7 +225,7 @@ const UserDataTransfer = ({ userName }) => {
       <UserCard user={user} />
       <span className="grade text-4xl">GitHub Stats</span>
       <div className="githubstats">
-      {/* <GithubCard userName={user} /> */}
+      <GithubCard userName={user} />
       </div>
     </>
   );

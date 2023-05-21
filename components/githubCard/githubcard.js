@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Github from "../../assets/githubshine.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 
-const OpenCard = ({ user }) => {
-  console.log(user + " github card"); // checked - working
+const OpenCard = ({ userName }) => {
+  console.log(userName + " github card"); // checked - workingl
   return (
     <>
       <div className="card   mx-auto lg:p-9 ">
@@ -13,27 +14,31 @@ const OpenCard = ({ user }) => {
             <ul>
               <li className="lg:m-4 m-2 text-justify">
                 ⭐ Total Stars :{" "}
-                <div className="count inline ml-1.5"> {user.stars}</div>
+                <div className="count inline ml-1.5"> {userName.stars}</div>
               </li>
               <li className="lg:m-4 m-2 text-justify">
                 🔄 Total Commits :{" "}
-                <div className="count inline ml-1">{user.commits}</div>
+                <div className="count inline ml-1">{userName.commits_count}</div>
               </li>
               <li className="lg:m-4 m-2 text-justify">
                 🔄 Total Repos :{" "}
-                <div className="count inline ml-1">{user.repos}</div>
+                <div className="count inline ml-1">{userName.repos_count_total}</div>
+              </li>
+              <li className="lg:m-4 m-2 text-justify">
+                🔄 Non Forked Repos :{" "}
+                <div className="count inline ml-1">{userName.repos_count_nonforked}</div>
               </li>
               <li className="lg:m-4 m-2 text-justify">
                 🛠️ Total Pull Request :{" "}
-                <div className="count inline ml-1">{user.pullRequests}</div>
+                <div className="count inline ml-1">{userName.pullRequests_count}</div>
               </li>
               <li className="lg:m-4 m-2 text-justify">
                 🚫 Total Contributions :{" "}
-                <div className="count inline ml-1">{user.issues}</div>
+                <div className="count inline ml-1">{userName.issues_count}</div>
               </li>
               <li className="lg:m-4 m-2 text-justify">
                 🎒 Flollowers :{" "}
-                <div className="count inline ml-1">{user.followers}</div>
+                <div className="count inline ml-1">{userName.followers}</div>
               </li>
             </ul>
           </div>
@@ -50,14 +55,17 @@ const OpenCard = ({ user }) => {
         {" "}
         <span className="grade text-4xl">Organisations</span>
         <div className="orgs">
-          {user.orgs ? (
-            user.orgs.map((org) => (
+          {userName.orgs ? (
+            userName.orgs.map((org) => (
               <div
-                className="org-wrap inline-block align-center text-center mx-auto my-4 w-3/12"
+                className="org-wrap inline-block align-center text-center rounded-3xl m-8 border-2 border-solid p-4 w-1/4"
                 key={org.id}
               >
-                <img className="boxes" src={org.avatar_url} alt={org.login} />
-              </div>
+              <Link href={`https://github.com/${org.login}`} target="_blank">
+          <img className="boxes rounded-full" src={org.avatar_url} alt={org.login} />
+          <span className="org-label  break-all ">{org.login}</span>
+      </Link>
+       </div>
             ))
           ) : (
             <div className="l">Loading...</div>

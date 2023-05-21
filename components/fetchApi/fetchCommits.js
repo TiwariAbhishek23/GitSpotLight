@@ -1,4 +1,4 @@
-export const fetchPullRequests = async (username) => {
+export const fetchCommits = async (username) => {
     try {
       const response = await fetch(`/api/commitsapi?username=${username}`);
       if (!response.ok) {
