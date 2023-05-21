@@ -50,8 +50,8 @@ const OpenCard = ({ user }) => {
         {" "}
         <span className="grade text-4xl">Organisations</span>
         <div className="orgs">
-          {orgs ? (
-            orgs.map((org) => (
+          {user.orgs ? (
+            user.orgs.map((org) => (
               <div
                 className="org-wrap inline-block align-center text-center mx-auto my-4 w-3/12"
                 key={org.id}

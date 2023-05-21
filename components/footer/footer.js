@@ -4,15 +4,7 @@ import Logo from "../../assets/githubshine.svg";
 import Image from "next/image";
 import Link from "next/link";
 const Footer = () => {
-  const [profile, setProfile] = useState({});
-  useEffect(() => {
-    fetch("./api/user")
-      .then((res) => res.json())
-      .then((data) => {
-        setProfile(data);
-      })
-      .catch((error) => console.error(error));
-  }, []);
+
 
   return (
     <>
