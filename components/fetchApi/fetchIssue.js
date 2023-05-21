@@ -1,6 +1,6 @@
 export const fetchIssues = async (username) => {
     try {
-      const response = await fetch(`/api/issuesapi?username=${username}`);
+      const response = await fetch(`/api/githubProfileapi?username=${username}`);
       if (!response.ok) {
         throw new Error("User not found");
 

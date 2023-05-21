@@ -56,7 +56,7 @@ const handleContent=(event)=>{
         mailsubject,
         content
       }
-      console.log(value)
+      // console.log(value)
       
       try{
         await fetch("../../api/contact",{

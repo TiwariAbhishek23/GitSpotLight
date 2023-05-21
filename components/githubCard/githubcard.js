@@ -5,7 +5,10 @@ import Link from "next/link";
 
 
 const OpenCard = ({ userName }) => {
-  console.log(userName + " github card"); // checked - workingl
+  // console.log(userName + " github card"); // checked - workingl
+  // if (!userName.stars || !userName.commits_count || !userName.repos_count_total || !userName.repos_count_nonforked || !userName.pullRequests_count || !userName.followers || !userName.orgs) {
+    // return <div>Loading...</div>; // Display a loading state until all data is available
+  // }
   return (
     <>
       <div className="card   mx-auto lg:p-9 ">

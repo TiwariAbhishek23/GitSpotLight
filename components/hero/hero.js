@@ -16,11 +16,12 @@ const Hero = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setLoading(true);
     try {
       // checked - working
       const response = await fetchUserData(user);
-      console.log(response + " response")
+      // console.log(response)
       if(response === null){
         setUser("");
         setError("User not found");
@@ -43,6 +44,9 @@ const Hero = () => {
       </div>
     );
   }
+  // console.log(userData );
+  console.log(user + " in hero");
+  console.log(userData)
   if (userData.message === "Not Found") {
     return (
       <div className="w-1/2 mx-auto my-24 bg-gray rounded-4xl p-8">
@@ -60,7 +64,8 @@ const Hero = () => {
         )}
         <div className="homeContent m-4 p-4">
           <InputForm user={user} setUser={setUser} handleSubmit={handleSubmit} />
-          {userData && (
+          {userData &&
+          (
 
             <UserProfileData userName={user}/>
           )}

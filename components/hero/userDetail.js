@@ -7,18 +7,21 @@ import { fetchRepos } from "../fetchApi/fetchRepo.js";
 import { fetchIssues } from "../fetchApi/fetchIssue.js";
 import UserCard from "./userCard";
 import GithubCard from "../githubCard/githubcard";
+import LanguagesPage from "./lang";
+import OrganizationContributionsPage from "./orgContri";
 
 
 const UserDataTransfer = ({ userName }) => {
-  // console.log(userName + " data"); // checked - working
+  console.log(userName + " data"); // checked - working
   const [loading, setLoading] = useState(false);
   const [err, setError] = useState(null);
-  const [userData, setUserData] = useState(null);
-  const [pullRequests, setPullRequests] = useState(null);
-  const [commits, setCommits] = useState(null);
-  const [repos, setRepos] = useState(null);
-  const [issues, setIssues] = useState(null);
-  const [orgs, setOrgs] = useState(null);
+  const [dataFetched, setDataFetched] = useState(false);
+  // const [userData, setUserData] = useState(null);
+  // const [pullRequests, setPullRequests] = useState(null);
+  // const [commits, setCommits] = useState(null);
+  // const [repos, setRepos] = useState(null);
+  // const [issues, setIssues] = useState(null);
+  // const [orgs, setOrgs] = useState(null);
 
   const [user, setUser] = useState({
     avatar_url: "",
@@ -59,35 +62,42 @@ const UserDataTransfer = ({ userName }) => {
   useEffect(() => {
 
     // Fetching User Data
+
+
+
     const fetchUserwrapper = async () => {
       setLoading(true);
       try {
         const response = await fetchUserData(userName);
-        // console.log(response + " response yaha  userdetail se");
+        // console.log(response );
         if (response === null) {
-          setUserData(null);
+          // setUserData(null);
           setError("User not found");
         }
-        setUserData(response);
+        else{
+        // setUserData(response);
         // console.log(response);
-        if (userData !== null) {
-          user.data = userData;
-          user.avatar_url = userData.avatar_url;
-          user.name = userData.name;
-          user.email = userData.email;
-          user.twitter_username = userData.twitter_username
-            ? userData.twitter_username
-            : "Not Available";
-          user.company = userData.company;
-          user.created_at = userData.created_at;
-          user.bio = userData.bio;
-          user.blog = userData.blog;
-          user.location = userData.location;
-          user.html_url = userData.html_url;
-          user.public_gists = userData.public_gists;
-          user.public_repos = userData.public_repos;
-          user.followers = userData.followers;
-        }
+
+        setUser(prevUser => ({
+          ...prevUser,
+          data: response,
+          avatar_url: response.avatar_url,
+          name: response.name,
+          email: response.email,
+          twitter_username: response.twitter_username
+            ? response.twitter_username
+            : "Not Available",
+          company: response.company,
+          created_at: response.created_at,
+          bio: response.bio,
+          blog: response.blog,
+          location: response.location,
+          html_url: response.html_url,
+          public_gists: response.public_gists,
+          public_repos: response.public_repos,
+          followers: response.followers
+        }));
+      }
         // console.log(user);
       } catch (err) {
         setError(err.message);
@@ -95,28 +105,37 @@ const UserDataTransfer = ({ userName }) => {
       setLoading(false);
     };
 
+
+
+
+
     // Fetching Pull Request Data
 
     const fetchPullRequestWrapper = async () => {
       setLoading(true);
       try {
         const response = await fetchPullRequests(userName);
-        // console.log(response + " response yaha ");
+        // console.log(response );
         if (response === null) {
-          setPullRequests(null);
+          // setPullRequests(null);
           setError("No Pull Requests");
         }
-        setPullRequests(response);
-        // console.log(response);
-        if (pullRequests !== null) {
-          user.pullRequests = pullRequests;
-          user.pullRequests_count = pullRequests.total_count;
+        else{
+        // setPullRequests(response);
+        setUser(prevUser => ({
+          ...prevUser,
+          pullRequests: response,
+          pullRequests_count: response.total_count
+        }));
         }
       } catch (err) {
         setError(err.message);
       }
       setLoading(false);
     };
+
+
+
 
     // Fetching Commit Data
 
@@ -126,21 +145,31 @@ const UserDataTransfer = ({ userName }) => {
         const response = await fetchCommits(userName);
         // console.log(response + " response yaha ");
         if (response === null) {
-          setCommits(null);
+          // setCommits(null);
           setError("No Commits");
         }
-        setCommits(response);
+        else{
+
+        // setCommits(response);
+        setUser(prevUser => ({
+          ...prevUser,
+          commits: response,
+          commits_count: response.total_count
+        }));
+        }
+      }
         // console.log(response);
-        user.commits_count = commits.total_count;
         // console.log("commits count");
         // console.log(user.commits_count);
         // console.log(response);
-        user.commits = commits;
-      } catch (err) {
+        catch (err) {
         setError(err.message);
       }
       setLoading(false);
     };
+
+
+
 
     // Fetching Repo Data
     const fetchRepoWrapper = async () => {
@@ -148,44 +177,56 @@ const UserDataTransfer = ({ userName }) => {
       try {
         const response = await fetchRepos(userName);
         if (response === null) {
-          setRepos(null);
+          // setRepos(null);
           setError("No Repos");
         }
-        setRepos(response);
-        user.repos = repos;
-        user.repos_count_total = repos.length;
-
-        const nonForkedRepos = repos.filter((repo) => !repo.fork);
-        user.repos_count_nonforked = nonForkedRepos.length;
-        user.nonForkedRepos = nonForkedRepos;
-
+        else{
+        // setRepos(response);
+        const nonForkedRepos = response.filter((repo) => !response.fork);
         const totalStars = nonForkedRepos.reduce((accumulator, repo) => accumulator + repo.stargazers_count, 0);
-        user.stars = totalStars;
 
+setUser(prevUser => ({
+          ...prevUser,
+          repos: response,
+          repos_count_total: response.length,
+          repos_count_nonforked : nonForkedRepos.length,
+          nonForkedRepos : nonForkedRepos,
+          stars : totalStars,
+        }));
+      }
       } catch (err) {
         setError(err.message);
       }
       setLoading(false);
     };
+
+
+
 
     // Fetching Issue Data
     const fetchIssueWrapper = async () => {
       setLoading(true);
       try {
         const response = await fetchIssues(userName);
-        console.log(response + " response yaha issue se");
+        // console.log(response + " response yaha issue se");
         if (response === null) {
-          setIssues(null);
+          // setIssues(null);
           setError("No Issues");
         }
-        setIssues(response);
-        console.log(response);
-        user.issues = issues;
+        else{
+        // setIssues(response);
+        // console.log(response);
+        setUser(prevUser => ({
+        issues : response,
+        }));
+      }
       } catch (err) {
         setError(err.message);
       }
       setLoading(false);
     };
+
+
 
     // Fetching Org Data
     const fetchOrgWrapper = async () => {
@@ -194,39 +235,54 @@ const UserDataTransfer = ({ userName }) => {
         const response = await fetchOrganisation(userName);
         // console.log(response + " response yaha org");
         if (response === null) {
-          setOrgs(null);
+          // setOrgs(null);
           setError("No Orgs");
         }
-        setOrgs(response);
+        else{
+        // setOrgs(response);
 
         // console.log(response);
-        user.orgs = orgs;
+        setUser(prevUser => ({
+        orgs : response,
+        }));
+      }
         // console.log(user.orgs);
       } catch (err) {
         setError(err.message);
       }
       setLoading(false);
     };
+    Promise.all([
+    fetchUserwrapper(),
+    fetchPullRequestWrapper(),
+    fetchCommitWrapper(),
+    fetchRepoWrapper(),
+    // fetchIssueWrapper(),
+    fetchOrgWrapper(),
+    ]).then(() => {
+      // console.log("in promise");
+      // console.log(user);
 
-    fetchUserwrapper();
-    fetchPullRequestWrapper();
-    fetchCommitWrapper();
-    fetchRepoWrapper();
-    fetchIssueWrapper();
-    fetchOrgWrapper();
-  }, []);
+    });
+  }, [userName
+    ])
 
-  console.log("in user data");
-  console.log(user);
+  // console.log("in user data");
+  // console.log(user);
 
 
   return (
     <>
-      <UserCard user={user} />
-      <span className="grade text-4xl">GitHub Stats</span>
-      <div className="githubstats">
-      <GithubCard userName={user} />
-      </div>
+
+  <>
+    {user && <UserCard user={user} />}
+    <span className="grade text-4xl">GitHub Stats</span>
+    <div className="githubstats">
+      {user && <GithubCard userName={user} />}
+    </div>
+  </>
+
+
     </>
   );
 };
