@@ -9,6 +9,7 @@ import UserCard from "./userCard";
 import GithubCard from "../githubCard/githubcard";
 import LanguagesPage from "./lang";
 import OrganizationContributionsPage from "./orgContri";
+import LangPieChart from "../Charts/langPieChart";
 
 
 const UserDataTransfer = ({ userName }) => {
@@ -280,6 +281,8 @@ setUser(prevUser => ({
     <div className="githubstats">
       {user && <GithubCard userName={user} />}
     </div>
+    <LangPieChart/>
+    {userName && <LanguagesPage userName={userName}/>}
   </>
 
 
