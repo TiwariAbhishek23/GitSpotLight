@@ -1,30 +1,54 @@
-import { useEffect, useState } from 'react';
-import {calculateOrgContributions } from '../fetchApi/fetchOrgContri';
-import { fetchEvents } from '../../pages/api/evensapi';
+import React, { useState, useEffect, use } from "react";
+import { fetchEvents } from "../fetchApi/fetchEvents";
+import OrgContriBarChart from "../Charts/orgContriBarChart";
 
-const OrganizationContributionsPage = () => {
-  const [orgContributions, setOrgContributions] = useState(null);
+const OrganizationContributionsPage = ({ userName }) => {
+  const [orgContri, setOrgContri] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [events, setEvents] = useState(null);
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-        setLoading(true);
-      try {
-        const username = 'kunal-kushwaha'; 
-        const events = await fetchEvents(username);
-        const contributions = calculateOrgContributions(events);
-        setOrgContributions(contributions);
-      } catch (error) {
-        setError(error.message);
+useEffect(() => {
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const data = await fetchEvents(userName);
+      console.log("data", data);
+      setEvents(data);
+    } catch (error) {
+      setError(error.message);
+    }
+    setLoading(false);
+  };
+
+  fetchData();
+}, [userName]);
+console.log("events", events);
+useEffect(() => {
+  if (events) {
+    const orgContri = events.reduce((acc, event) => {
+      const { type, org,repo } = event;
+      if (type === "PushEvent") {
+        if (repo) {
+          const  repoName  = repo.name;
+          if (acc[repoName]) {
+            acc[repoName] += event.payload.commits.length;
+          } else {
+            acc[repoName] = event.payload.commits.length || 1;
+          }
+        }
       }
-        setLoading(false);
+      return acc;
+    }, {});
+    setOrgContri(orgContri);
+  }
+}, [events]);
 
-    };
 
-    fetchData();
-  }, []);
+
+
+console.log("orgContri", orgContri);
 
   if (error) {
     return <p>Error: {error}</p>;
@@ -36,13 +60,7 @@ const OrganizationContributionsPage = () => {
 
   return (
     <div>
-      <h1>Organization Contributions</h1>
-      {Object.entries(orgContributions).map(([org, count]) => (
-        <div key={org}>
-          <span>{org}: </span>
-          <span>{count}</span>
-        </div>
-      ))}
+      <OrgContriBarChart orgContri={orgContri} />
     </div>
   );
 };

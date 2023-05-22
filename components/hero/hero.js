@@ -45,8 +45,8 @@ const Hero = () => {
     );
   }
   // console.log(userData );
-  console.log(user + " in hero");
-  console.log(userData)
+  // console.log(user + " in hero");
+  // console.log(userData)
   if (userData.message === "Not Found") {
     return (
       <div className="w-1/2 mx-auto my-24 bg-gray rounded-4xl p-8">

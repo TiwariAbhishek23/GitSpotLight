@@ -1,12 +1,20 @@
-export const fetchRepoLanguages = async (username) => {
+export const fetchRepoLanguages = async (userName) => {
+  const header = {
+    Authorization: `token ${process.env.GITHUB_TOKEN}`
+  };
+
   try {
-    const response = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
+    const response = await fetch(`https://api.github.com/users/${userName}/repos?per_page=100`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch repositories");
     }
 
     const repos = await response.json();
+
+    if (!Array.isArray(repos)) {
+      throw new Error("Invalid response: repositories is not an array");
+    }
 
     const nonForkedRepos = repos.filter((repo) => !repo.fork);
 

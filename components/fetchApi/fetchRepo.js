@@ -1,12 +1,15 @@
-export const fetchRepos = async (username) => {
+export const fetchRepos = async (userName) => {
   const perPage = 100;
   let page = 1;
   let repos = [];
+  const header = {
+    Authorization: `token ${process.env.GITHUB_TOKEN}`
+  };
 
   try {
     while (true) {
       const response = await fetch(
-        `https://api.github.com/users/${username}/repos?per_page=${perPage}&page=${page}`
+        `https://api.github.com/users/${userName}/repos?per_page=${perPage}&page=${page}`, { headers: header }
       );
 
       if (!response.ok) {

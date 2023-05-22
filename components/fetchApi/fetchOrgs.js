@@ -1,6 +1,6 @@
-export const fetchOrganisation = async (username) => {
+export const fetchOrganisation = async (userName) => {
     try {
-      const response = await fetch(`/api/organisationapi?username=${username}`);
+      const response = await fetch(`/api/organisationapi?userName=${userName}`);
       if (!response.ok) {
         throw new Error("User not found");
 

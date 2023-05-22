@@ -12,6 +12,7 @@ const LanguagesPage = ({ userName }) => {
       setLoading(true);
       try {
         const data = await fetchRepoLanguages(userName);
+        console.log('data', data);
         setLanguages(data);
       } catch (error) {
         setError(error.message);

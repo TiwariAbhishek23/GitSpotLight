@@ -30,9 +30,9 @@ const LangPieChart = ({ languages }) => {
 
 
   return (
-    <div>
-      <h2>Languages Used in Personal Repositories</h2>
-      <Pie data={chartData}  />
+    <div className='m-12'>
+      <div className='text-center text-4xl text-bold my-6'>Languages Used in Personal Repositories</div>
+      <Pie data={chartData} className=' bg-goldenyellow p-4 rounded-4xl my-12'  />
     </div>
   );
 };

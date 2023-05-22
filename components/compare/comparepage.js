@@ -35,7 +35,7 @@ const ComparePage = () => {
   const [currentStreak2, setCurrentStreak2] = useState(null);
 
   // submit Button
-  const handleSubmit = async (username1, username2) => {
+  const handleSubmit = async (userName1, username2) => {
     setLoading(true);
     setStatus("Extracting Data...");
 

@@ -9,11 +9,11 @@ import UserCard from "./userCard";
 import GithubCard from "../githubCard/githubcard";
 import LanguagesPage from "./lang";
 import OrganizationContributionsPage from "./orgContri";
-import LangPieChart from "../Charts/langPieChart";
+
 
 
 const UserDataTransfer = ({ userName }) => {
-  console.log(userName + " data"); // checked - working
+  // console.log(userName + " data"); // checked - working
   const [loading, setLoading] = useState(false);
   const [err, setError] = useState(null);
   const [dataFetched, setDataFetched] = useState(false);
@@ -271,7 +271,7 @@ setUser(prevUser => ({
   // console.log("in user data");
   // console.log(user);
 
-
+console.log(userName + " in user data transfer");
   return (
     <>
 
@@ -281,8 +281,8 @@ setUser(prevUser => ({
     <div className="githubstats">
       {user && <GithubCard userName={user} />}
     </div>
-    <LangPieChart/>
     {userName && <LanguagesPage userName={userName}/>}
+    {userName && <OrganizationContributionsPage userName={userName}/>}
   </>
 
 

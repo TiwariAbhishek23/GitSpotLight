@@ -14,8 +14,8 @@
 
 ## Features
 
-- Get GitHub statistics for a user based on their GitHub username.
-- Compare the GitHub statistics of two users based on their GitHub username.
+- Get GitHub statistics for a user based on their GitHub userName.
+- Compare the GitHub statistics of two users based on their GitHub userName.
 - View user details such as their name, email, blog, and profile picture.
 - View user activity such as their most recent commits and pull requests.
 - Option to view user's GitHub contributions chart.
@@ -27,7 +27,7 @@
 
 ## Current Available Features
 
-- Github Stats Using Github Username
+- Github Stats Using Github UserName
 - Stats Explanation Using Charts
 - Share Button
 

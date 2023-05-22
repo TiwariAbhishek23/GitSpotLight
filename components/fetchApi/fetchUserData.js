@@ -1,6 +1,6 @@
-export const fetchUserData = async (username) => {
+export const fetchUserData = async (userName) => {
     try {
-      const response = await fetch(`/api/githubProfileapi?username=${username}`);
+      const response = await fetch(`/api/githubProfileapi?userName=${userName}`);
       if (!response.ok) {
         throw new Error("User not found");
       }

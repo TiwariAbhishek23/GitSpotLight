@@ -18,15 +18,15 @@ const InputForm = (props) => {
     <div className="form my-32 mx-auto bg-gray rounded-4xl m-32 p-8">
       <form>
         <div className="flex flex-col space-y-4">
-          <label htmlFor="username" className="text-center">
-            Enter GitHub username
+          <label htmlFor="userName" className="text-center">
+            Enter GitHub userName
           </label>
           <input
             type="text"
-            id="username"
+            id="userName"
             value={user}
             onChange={handleUserChange}
-            placeholder="GitHub username"
+            placeholder="GitHub userName"
             className="border-2 border-gray-300 rounded-lg p-2 text-black"
           />
           <button
