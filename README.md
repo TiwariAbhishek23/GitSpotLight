@@ -29,11 +29,12 @@
 
 - Github Stats Using Github UserName
 - Stats Explanation Using Charts
-- Share Button
+
 
 ## UpComing Features
 
 - Compare GitHub Stats
+- - Share Button
 - Download Github Stats Report
 
 ## Future Idia
