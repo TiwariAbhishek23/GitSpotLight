@@ -34,10 +34,10 @@
 ## UpComing Features
 
 - Compare GitHub Stats
-- - Share Button
+- Share Button
 - Download Github Stats Report
 
-## Future Idia
+## Future Idea
 
 - Contribution Stats for Large Codebases
 - Hiring Solution
