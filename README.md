@@ -54,7 +54,7 @@
     ![](./assets/readme/contact.png)
     
 ## Phase 1 Video-Clip ( Still Working)
-    ![](./assets/readme/p1video)
+    ![](./assets/readme/phase1Video.mov)
 
 
 ## Getting Started
