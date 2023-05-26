@@ -5,9 +5,10 @@
 ## Problem It Solves
 
 - ### Developer productivity and motivation
-    - GitSpotLight help the developers to stay motivated and check their progress, they can also compare with friends and others
+    - GitSpotLight help the developers to stay motivated and check their progress, they can also compare stats with friends and others, share on social media.
 - ### Hiring and talent acquisition
     - Employers could quickly get an overview of the candidate's experience, skill level, and areas of expertise.
+    - Please have a look at theese two readme.md of two different users, first [Kunal](https://github.com/kunal-kushwaha) not much detailed readme and other [Abhishek](https://github.com/AbhishekTiwari23) a detailed readme, in this case to check the real stats, managers can you __GitSpotLight__
 - ### Open-source project management
     - Help maintainers to identify top contributors and allocate resources accordingly.
 
