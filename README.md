@@ -53,8 +53,10 @@
 - ContactUs Page
     ![](./assets/readme/contact.png)
     
-## Phase 1 Video-Clip ( Still Working)
-    ![](./assets/readme/phase1Video.mov)
+- Phase 1 Video-Clip ( Still Working)
+
+    https://github.com/AbhishekTiwari23/GitSpotLight/assets/97469132/99dcf35e-be86-4b25-b6c7-4e834547c4e3
+
 
 
 ## Getting Started
