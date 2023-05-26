@@ -4,11 +4,11 @@
 
 ## Problem It Solves
 
-- # Developer productivity and motivation
+- ### Developer productivity and motivation
     - GitSpotLight help the developers to stay motivated and check their progress, they can also compare with friends and others
-- # Hiring and talent acquisition
+- ### Hiring and talent acquisition
     - Employers could quickly get an overview of the candidate's experience, skill level, and areas of expertise.
-- # Open-source project management
+- ### Open-source project management
     - Help maintainers to identify top contributors and allocate resources accordingly.
 
 
@@ -52,6 +52,10 @@
     
 - ContactUs Page
     ![](./assets/readme/contact.png)
+    
+## Phase 1 Video-Clip ( Still Working)
+    ![](./assets/readme/p1video)
+
 
 ## Getting Started
 
@@ -80,6 +84,7 @@ Contributions are always welcome! If you would like to contribute to the project
 - [Next.js](https://nextjs.org/docs/getting-started)
 - [TailwindCss](https://tailwindcss.com/docs/installation)
 - [Chart.Js](https://www.chartjs.org/docs/latest/)
+- [Work Flow](./workFlow.md)
 
 ## Contact
 - If you have any questions about GitSpotLight or would like to reach out to the developer, please use the contact form provided in the application or email me directly at tiwari.abhishektiwari23@gmail.com.
