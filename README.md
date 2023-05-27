@@ -42,7 +42,7 @@
 - Share Button
 - Download Github Stats Report
 
-## Future Idea
+## Future Ideas
 
 - Contribution Stats for Large Codebases
 - Hiring Solution
@@ -63,6 +63,21 @@
     https://github.com/AbhishekTiwari23/GitSpotLight/assets/97469132/99dcf35e-be86-4b25-b6c7-4e834547c4e3
 
 
+## API End-Points Used
+- To Collect user Profile Data
+  - `https://api.github.com/users/${userName}`
+- Commits Data
+  - `https://api.github.com/search/commits?q=author:${userName}`
+- User GitHub Events
+  - `https://api.github.com/users/${userName}/events?page=${page}&per_page=${perPage}`
+- User Isses Data
+  - `https://api.github.com/search/issues?q=author:${userName}`
+- User Organisations Data
+  - `https://api.github.com/users/${userName}/orgs`
+- Pull Request Data
+  - `https://api.github.com/search/issues?q=type:pr+author:${userName}`
+- Repository Data
+  - `https://api.github.com/users/${userName}/repos?per_page=${per_pages}0&page=${pages}`
 
 ## Getting Started
 
