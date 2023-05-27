@@ -1,6 +1,10 @@
 # GitSpotLight 🐙
 
  The application is built using Next.js, Tailwind CSS, and the GitHub API. It also features a contact form using Nodemailer for users to reach out to the developer.
+ 
+ [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/AbhishekTiwari23/GitSpotLight)
+
+
 
 ## Problem It Solves
 
@@ -61,6 +65,9 @@
 
 
 ## Getting Started
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/AbhishekTiwari23/GitSpotLight)
+
 
 To get started with GitSpotLight, follow these steps:
 
