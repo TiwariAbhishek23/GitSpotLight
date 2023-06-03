@@ -1,16 +1,32 @@
 name: Greetings
 
-on: [pull_request_target, issues]
+on:
+  pull_request_target:
+    types:
+      - opened
+  issues:
+    types:
+      - opened
 
 jobs:
   greeting:
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      pull-requests: write
     steps:
-    - uses: actions/first-interaction@v1
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        issue-message: "Message that will be displayed on users' first issue"
-        pr-message: "Message that will be displayed on users' first pull request"
+      - name: Check if it's the first interaction
+        id: check_first_interaction
+        run: |
+          echo "is_first_interaction=true" >> $GITHUB_ENV
+          if [ -f ${{ github.event.issue.pull_request.url }} ]; then
+            echo "is_first_interaction=false" >> $GITHUB_ENV
+          fi
+
+      - name: Greet new contributors
+        if: steps.check_first_interaction.outputs.is_first_interaction == 'true'
+        run: |
+          echo "Welcome to our repository! Thank you for opening an issue. We appreciate your feedback and will address it as soon as possible."
+          echo "Hello! Thank you for your contribution. We will review your pull request and provide feedback shortly. Keep up the good work!"
+
+      - name: Greet returning contributors
+        if: steps.check_first_interaction.outputs.is_first_interaction == 'false'
+        run: |
+          echo "Hello again! Thank you for your continued support and contribution. We appreciate your involvement in our repository."
