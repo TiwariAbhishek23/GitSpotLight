@@ -16,7 +16,7 @@ jobs:
         id: check_first_interaction
         run: |
           echo "is_first_interaction=true" >> $GITHUB_ENV
-          if [ -f ${{ github.event.issue.pull_request.url }} ]; then
+          if [ "${{ github.event_name }}" == 'pull_request_target' ]; then
             echo "is_first_interaction=false" >> $GITHUB_ENV
           fi
 
