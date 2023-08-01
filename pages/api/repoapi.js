@@ -1,16 +1,32 @@
-export default async function handler(req, res) {
-    const { userName } = req.query;
-    const header = {
-      Authorization: `token ${process.env.GITHUB_TOKEN}`
-    };
-    try {
-      const response = await fetch(`https://api.github.com/users/${userName}/repos`);
+export const fetchRepos = async (userName) => {
+
+  let repos = [];
+  const header = {
+    Authorization: `token ${process.env.GITHUB_TOKEN}`
+  };
+
+  try {
+    while (true) {
+      const response = await fetch(
+        `https://api.github.com/users/${userName}/repos?per_page=10000&page=1`, { headers: header }
+      );
+
       if (!response.ok) {
-        return res.status(404).json({ message: 'User not found' });
+        throw new Error("Failed to fetch repositories");
       }
+
       const data = await response.json();
-      res.status(200).json(data);
-    } catch (error) {
-      res.status(500).json({ message: 'Internal server error' });
+
+      if (data.length === 0) {
+        break;
+      }
+
+      repos = repos.concat(data);
+      page++;
     }
+
+    return repos;
+  } catch (error) {
+    throw new Error(error.message);
   }
+};

@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
   const { userName } = req.query;
   const header = {
-    Authorization: `token ${process.env.GITHUB_TOKEN}`
+    Authorisation: `token ${process.env.GITHUB_TOKEN}`
   };
   try {
     const response = await fetch(`https://api.github.com/users/${userName}`);

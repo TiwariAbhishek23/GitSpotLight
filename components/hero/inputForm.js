@@ -1,19 +1,23 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+
+/*
+Input form for the hero section
+
+Props:
+  user: string
+  setUser: function
+  handleSubmit: function
+*/
+
+
+
 
 const InputForm = (props) => {
   const { user, setUser, handleSubmit } = props;
 
   const handleUserChange = (e) => {
-    // console.log(e.target.value);
     setUser(e.target.value);
-    // console.log(user + " in inputform");
   };
-  // useEffect(() => {
-  //   console.log(user); // Log the updated user value
-  // }, [user]);
-// console.log(user + " in inputform");
-// checked - working
   return (
     <div className="form my-32 mx-auto bg-gray rounded-4xl m-32 p-8">
       <form>

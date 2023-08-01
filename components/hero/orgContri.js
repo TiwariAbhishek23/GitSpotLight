@@ -14,7 +14,7 @@ useEffect(() => {
     setLoading(true);
     try {
       const data = await fetchEvents(userName);
-      console.log("data", data);
+      // console.log("data", data);
       setEvents(data);
     } catch (error) {
       setError(error.message);
@@ -24,7 +24,7 @@ useEffect(() => {
 
   fetchData();
 }, [userName]);
-console.log("events", events);
+// console.log("events", events);
 useEffect(() => {
   if (events) {
     const orgContri = events.reduce((acc, event) => {
@@ -45,10 +45,7 @@ useEffect(() => {
   }
 }, [events]);
 
-
-
-
-console.log("orgContri", orgContri);
+// console.log("orgContri", orgContri);
 
   if (error) {
     return <p>Error: {error}</p>;

@@ -10,11 +10,15 @@
   },
   "dependencies": {
     "@next/font": "13.1.6",
+    "@octokit/core": "^4.2.1",
+    "@octokit/graphql": "^5.0.6",
+    "@octokit/rest": "^19.0.11",
     "chart.js": "^4.3.0",
     "moment": "^2.29.4",
     "next": "13.1.6",
     "next-themes": "^0.2.1",
     "nodemailer": "^6.9.1",
+    "octokit": "^2.0.18",
     "react": "18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
@@ -22,6 +26,8 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
+    "eslint": "8.41.0",
+    "eslint-config-next": "13.4.3",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.6"
   }

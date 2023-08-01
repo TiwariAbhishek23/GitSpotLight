@@ -1,17 +1,15 @@
 import React from 'react'
-import GithubCard from '../githubCard/githubcard';
+import Image from 'next/image';
 const UserCard = ({user}) => {
-  // console.log("in userCard")
-  // console.log(user.name + "name")
-  // console.log(user)
-  // if (!user.avatar_url || !user.name || !user.email || !user.twitter_user || !user.company || !user.created_at) {
-    // return <div>Loading...</div>; // Display a loading state until all data is available
-  // }
+
+  if (!user.avatar_url || !user.name || !user.email || !user.twitter_user || !user.company || !user.created_at) {
+    return <div>Loading...</div>; // Display a loading state until all data is available
+  }
     return (
         <div className="stats ">
         <div className="user">
           <div className="pic ">
-            <img
+            <Image
               src={user.avatar_url}
               alt="userName Profile Avatar"
               height="200"

@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 
 import HeroEffect from "./heroEffect";
 import InputForm from "./inputForm";
@@ -6,73 +6,62 @@ import UserProfileData from "./userDetail";
 import { fetchUserData } from "../fetchApi/fetchUserData";
 
 
-const Hero = () => {
 
+const Hero = () => {
   const [user, setUser] = useState("");
   const [userData, setUserData] = useState("");
   const [loading, setLoading] = useState(false);
   const [err, setError] = useState(null);
 
-
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setLoading(true);
     try {
-      // checked - working
+      // Fetch user data
       const response = await fetchUserData(user);
-      // console.log(response)
-      if(response === null){
+
+      if (response === null) {
         setUser("");
         setError("User not found");
+      } else {
+        setUserData(response);
       }
-      setUserData(response);
     } catch (err) {
       setError(err.message);
     }
     setLoading(false);
   };
+
+
+  let content;
+
   if (loading) {
-    return <div className="loading">Still Loadiing...</div>;
-  }
-  if (err) {
-    return (
-      <div className="w-1/2 mx-auto my-24 bg-gray rounded-4xl p-8">
-        <InputForm user={user} setUser={setUser} handleSubmit={handleSubmit} />
-
-        <div className="error">🥲 Got Error : {err}</div>
+    content = <div className="loading">Still Loading...</div>;
+  } else if (err) {
+    content = (
+      <div className="error">🥲 Got Error: {err}</div>
+    );
+  } else if (userData.message === "Not Found") {
+    content = (
+      <div className="error text-center text-4xl">🥲 UserName not found</div>
+    );
+  } else {
+    content = (
+      <div>
+        {!userData && <HeroEffect />}
+        <UserProfileData userName={user} />
       </div>
     );
   }
-  // console.log(userData );
-  // console.log(user + " in hero");
-  // console.log(userData)
-  if (userData.message === "Not Found") {
-    return (
-      <div className="w-1/2 mx-auto my-24 bg-gray rounded-4xl p-8">
-       <InputForm user={user} setUser={setUser} handleSubmit={handleSubmit} />
 
-        <div className="error text-center text-4xl">🥲 UserName not found</div>
-      </div>
-    );
-  }
-  {
-    return (
-      <div className="w-1/2 mx-auto my-8  p-8">
-        {!userData && (
-          <HeroEffect/>
-        )}
-        <div className="homeContent m-4 p-4">
-          <InputForm user={user} setUser={setUser} handleSubmit={handleSubmit} />
-          {userData &&
-          (
-
-            <UserProfileData userName={user}/>
-          )}
-        </div>
-      </div>
-    );
-  }
+  return (
+    <div className="w-1/2 mx-auto my-8 p-8">
+      <InputForm user={user} setUser={setUser} handleSubmit={handleSubmit} />
+      {content}
+    </div>
+  );
 };
-export default Hero;
 
+export default Hero;
