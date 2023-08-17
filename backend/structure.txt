@@ -1,0 +1,43 @@
+# File Structure
+
+backend
+|
+|-Api
+|   |
+|   |- Routes
+|       |- route_company.py
+|       |- route_email.py
+|       |- route_user.py
+|       |- route_auth.py
+|
+|-Core
+|   |- email.py
+|   |- config.py
+|   |- hashing.py
+|   |- permissions.py
+|   |- security.py
+|
+|-databse
+|   |
+|   |- Models
+|   |    |- Company.py
+|   |    |- User.py
+|   |
+|   |-Repository
+|   |    |- User.py
+|   |    |- Company.py
+|   |
+|   |- BaseClass.py
+|   |
+|   |- Sessions.py
+|
+|-Schemas
+|   |- Company.py
+|   |- User.py
+|   |- Token.py
+|
+|-Test
+|
+|-.env
+|
+|-Requirements.txt
