@@ -4,7 +4,7 @@ from enum import Enum
 
 class Role(str, Enum):
     user = "USER"
-    userManager = "USERMANAGER"
+    CompanyManager = "CompanyManager"
     admin = "ADMIN"
 
     class Config:
