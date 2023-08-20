@@ -11,7 +11,10 @@ class job(BaseModel):
     experience: str = Field(example="3+ years")
     skills: list = Field(example=["Python", "Java", "C++"])
     company: str = Field(example="Microsoft")
+    application_count: int = Field(example=0)
+    company_id: int = Field(example=1)
     
+
 
     class Config:
         orm_mode = True
