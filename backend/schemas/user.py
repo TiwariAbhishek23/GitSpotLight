@@ -16,9 +16,14 @@ class UserCreate(BaseModel):
     username: str = Field(example="johndoe")
     email: EmailStr = Field(example="john@gmail.com")
     password: str = Field(example="JohnDoe@123")
-    join_date: date = Field(example=date.today())
-    role: Role = "USER"
-
+    join_date = date.today()
+    role = Role.user
+    github_url = str = Field(example="www.github.com/johndoe")
+    linkedin_url = str = Field(example="www.linkedin.com/johndoe")
+    twitter_url = str = Field(example="www.twitter.com/johndoe")
+    facebook_url = str = Field(example="www.facebook.com/johndoe")
+    instagram_url = str = Field(example="www.instagram.com/johndoe")
+    verified = bool = Field(default=False)
 
     class Config:
         orm_mode = True
