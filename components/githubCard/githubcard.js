@@ -16,30 +16,30 @@ const OpenCard = ({ userName }) => {
         <div className="stats mx-auto my-4 px-1 py-9 bg-white dark:bg-goldenyellow text-black rounded-4xl border border-solid border-black">
           <div className="stats-wrap inline-block ">
             <ul>
-              {/* <li className="lg:m-4 m-2 text-justify">
+              <li className="lg:m-4 m-2 text-justify">
                 ⭐ Total Stars :{" "}
                 <div className="count inline ml-1.5"> {userName.stars}</div>
               </li>
               <li className="lg:m-4 m-2 text-justify">
                 🔄 Total Commits :{" "}
                 <div className="count inline ml-1">{userName.commits_count}</div>
-              </li> */}
+              </li>
               <li className="lg:m-4 m-2 text-justify">
                 🔄 Total Repos :{" "}
                 <div className="count inline ml-1">{userName.public_repos}</div>
               </li>
-              {/* <li className="lg:m-4 m-2 text-justify">
+              <li className="lg:m-4 m-2 text-justify">
                 🔄 Non Forked Repos :{" "}
                 <div className="count inline ml-1">{userName.repos_count_nonforked}</div>
-              </li> */}
+              </li>
               <li className="lg:m-4 m-2 text-justify">
                 🛠️ Total Pull Request :{" "}
                 <div className="count inline ml-1">{userName.pullRequests_count}</div>
               </li>
-              {/* <li className="lg:m-4 m-2 text-justify">
+              <li className="lg:m-4 m-2 text-justify">
                 🚫 Total Contributions :{" "}
                 <div className="count inline ml-1">{userName.issues_count}</div>
-              </li> */}
+              </li>
               <li className="lg:m-4 m-2 text-justify">
                 🎒 Flollowers :{" "}
                 <div className="count inline ml-1">{userName.followers}</div>
